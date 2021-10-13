@@ -26,17 +26,77 @@ public class MainActivity extends AppCompatActivity {
 
         init();
         kockaEgyButton.setOnClickListener(view -> {
-            kockaKettoButton.setVisibility(View.INVISIBLE);
+            masodikImageView.setVisibility(View.GONE);
+
             lathatoEMindAKettoKepAmelyikADobokockatJelenitiMeg = false;
         });
         kockaKettoButton.setOnClickListener(view -> {
-            kockaKettoButton.setVisibility(View.VISIBLE);
+            masodikImageView.setVisibility(View.VISIBLE);
             lathatoEMindAKettoKepAmelyikADobokockatJelenitiMeg = true;
         });
         dobasButton.setOnClickListener(view -> {
+            String sor = "";
+            int osszeg = 0;
+            int hanyszor = 1;
             if (lathatoEMindAKettoKepAmelyikADobokockatJelenitiMeg) {
-
+                hanyszor = 2;
             }
+            for (int i = 0; i < hanyszor; i++) {
+                if (i == 0) {
+                    int randomSzam = (int)(Math.random() * 6) + 1;
+                    if (!lathatoEMindAKettoKepAmelyikADobokockatJelenitiMeg) {
+                        dobasokSzoveg += randomSzam + "\n";
+                    }
+                    osszeg += randomSzam;
+                    sor += " (" + randomSzam + "+";
+                    switch (randomSzam) {
+                        case 1:
+                            elsoImageView.setImageResource(R.drawable.kocka1);
+                            break;
+                        case 2:
+                            elsoImageView.setImageResource(R.drawable.kocka2);
+                            break;
+                        case 3:
+                            elsoImageView.setImageResource(R.drawable.kocka3);
+                            break;
+                        case 4:
+                            elsoImageView.setImageResource(R.drawable.kocka4);
+                            break;
+                        case 5:
+                            elsoImageView.setImageResource(R.drawable.kocka5);
+                            break;
+                        case 6:
+                            elsoImageView.setImageResource(R.drawable.kocka6);
+                            break;
+                    }
+                } else {
+                    int randomSzam = (int)(Math.random() * 6) + 1;
+                    sor += randomSzam + ")\n";
+                    osszeg += randomSzam;
+                    dobasokSzoveg += osszeg + sor;
+                    switch (randomSzam) {
+                        case 1:
+                            masodikImageView.setImageResource(R.drawable.kocka1);
+                            break;
+                        case 2:
+                            masodikImageView.setImageResource(R.drawable.kocka2);
+                            break;
+                        case 3:
+                            masodikImageView.setImageResource(R.drawable.kocka3);
+                            break;
+                        case 4:
+                            masodikImageView.setImageResource(R.drawable.kocka4);
+                            break;
+                        case 5:
+                            masodikImageView.setImageResource(R.drawable.kocka5);
+                            break;
+                        case 6:
+                            masodikImageView.setImageResource(R.drawable.kocka6);
+                            break;
+                    }
+                }
+            }
+            textView.setText(dobasokSzoveg);
         });
     }
 
