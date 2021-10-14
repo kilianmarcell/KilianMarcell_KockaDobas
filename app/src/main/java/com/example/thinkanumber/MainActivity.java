@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
             alertBuilder.setNegativeButton("Nem", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-                    finish();
+                    closeContextMenu();
                 }
             });
             alertBuilder.setPositiveButton("Igen", new DialogInterface.OnClickListener() {
