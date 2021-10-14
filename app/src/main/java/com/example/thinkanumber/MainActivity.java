@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -49,55 +50,42 @@ public class MainActivity extends AppCompatActivity {
                     }
                     osszeg += randomSzam;
                     sor += " (" + randomSzam + "+";
-                    switch (randomSzam) {
-                        case 1:
-                            elsoImageView.setImageResource(R.drawable.kocka1);
-                            break;
-                        case 2:
-                            elsoImageView.setImageResource(R.drawable.kocka2);
-                            break;
-                        case 3:
-                            elsoImageView.setImageResource(R.drawable.kocka3);
-                            break;
-                        case 4:
-                            elsoImageView.setImageResource(R.drawable.kocka4);
-                            break;
-                        case 5:
-                            elsoImageView.setImageResource(R.drawable.kocka5);
-                            break;
-                        case 6:
-                            elsoImageView.setImageResource(R.drawable.kocka6);
-                            break;
-                    }
+                    kepBeallitas(randomSzam, elsoImageView);
                 } else {
                     int randomSzam = (int)(Math.random() * 6) + 1;
                     sor += randomSzam + ")\n";
                     osszeg += randomSzam;
                     dobasokSzoveg += osszeg + sor;
-                    switch (randomSzam) {
-                        case 1:
-                            masodikImageView.setImageResource(R.drawable.kocka1);
-                            break;
-                        case 2:
-                            masodikImageView.setImageResource(R.drawable.kocka2);
-                            break;
-                        case 3:
-                            masodikImageView.setImageResource(R.drawable.kocka3);
-                            break;
-                        case 4:
-                            masodikImageView.setImageResource(R.drawable.kocka4);
-                            break;
-                        case 5:
-                            masodikImageView.setImageResource(R.drawable.kocka5);
-                            break;
-                        case 6:
-                            masodikImageView.setImageResource(R.drawable.kocka6);
-                            break;
-                    }
+                    kepBeallitas(randomSzam, masodikImageView);
                 }
             }
+            Toast.makeText(MainActivity.this, osszeg + "", Toast.LENGTH_SHORT).show();
             textView.setText(dobasokSzoveg);
         });
+    }
+
+    public void kepBeallitas(int randomSzam, ImageView imegeView) {
+
+        switch (randomSzam) {
+            case 1:
+                imegeView.setImageResource(R.drawable.kocka1);
+                break;
+            case 2:
+                imegeView.setImageResource(R.drawable.kocka2);
+                break;
+            case 3:
+                imegeView.setImageResource(R.drawable.kocka3);
+                break;
+            case 4:
+                imegeView.setImageResource(R.drawable.kocka4);
+                break;
+            case 5:
+                imegeView.setImageResource(R.drawable.kocka5);
+                break;
+            case 6:
+                imegeView.setImageResource(R.drawable.kocka6);
+                break;
+        }
     }
 
     private void init() {
