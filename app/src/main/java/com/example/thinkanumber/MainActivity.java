@@ -1,7 +1,9 @@
 package com.example.thinkanumber;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -62,9 +64,38 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this, osszeg + "", Toast.LENGTH_SHORT).show();
             textView.setText(dobasokSzoveg);
         });
+
+        resetButton.setOnClickListener(view -> {
+            AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
+            alertBuilder.setTitle("Reset");
+            alertBuilder.setMessage("Biztos, hogy törölni szeretné az eddigi dobásokat?");
+            alertBuilder.setMessage("Szeretne új játékot játszani?");
+            alertBuilder.setNegativeButton("Nem", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    finish();
+                }
+            });
+            alertBuilder.setPositiveButton("Igen", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    ujJatek();
+                    closeContextMenu();
+                }
+            });
+            alertBuilder.create().show();
+        });
     }
 
-    public void kepBeallitas(int randomSzam, ImageView imegeView) {
+    private void ujJatek() {
+        dobasokSzoveg = "";
+        textView.setText("");
+        elsoImageView.setImageResource(R.drawable.kocka1);
+        masodikImageView.setImageResource(R.drawable.kocka1);
+        masodikImageView.setVisibility(View.VISIBLE);
+    }
+
+    private void kepBeallitas(int randomSzam, ImageView imegeView) {
 
         switch (randomSzam) {
             case 1:
