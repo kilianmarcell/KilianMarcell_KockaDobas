@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -30,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
         init();
         kockaEgyButton.setOnClickListener(view -> {
             masodikImageView.setVisibility(View.GONE);
-
             lathatoEMindAKettoKepAmelyikADobokockatJelenitiMeg = false;
         });
         kockaKettoButton.setOnClickListener(view -> {
@@ -38,6 +38,11 @@ public class MainActivity extends AppCompatActivity {
             lathatoEMindAKettoKepAmelyikADobokockatJelenitiMeg = true;
         });
         dobasButton.setOnClickListener(view -> {
+
+
+            //TODO: kepValtakozas();
+
+
             String sor = "";
             int osszeg = 0;
             int hanyszor = 1;
@@ -93,6 +98,32 @@ public class MainActivity extends AppCompatActivity {
         elsoImageView.setImageResource(R.drawable.kocka1);
         masodikImageView.setImageResource(R.drawable.kocka1);
         masodikImageView.setVisibility(View.VISIBLE);
+    }
+
+    public void kepValtakozas() {
+        int[] imageArray = {
+                R.drawable.kocka1,
+                R.drawable.kocka2,
+                R.drawable.kocka3,
+                R.drawable.kocka4,
+                R.drawable.kocka5,
+                R.drawable.kocka6,
+        };
+        Handler handler = new Handler();
+        Runnable runnable = new Runnable() {
+            int i = (int)Math.random() * 6 + 1;
+
+            public void run() {
+                elsoImageView.setImageResource(imageArray[i]);
+                masodikImageView.setImageResource(imageArray[i]);
+                i++;
+                if (i > imageArray.length - 1) {
+                    i = 0;
+                }
+                handler.postDelayed(this, 200);
+            }
+        };
+        handler.postDelayed(runnable, 200);
     }
 
     private void kepBeallitas(int randomSzam, ImageView imegeView) {
