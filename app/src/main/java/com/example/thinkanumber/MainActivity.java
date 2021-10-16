@@ -98,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
         elsoImageView.setImageResource(R.drawable.kocka1);
         masodikImageView.setImageResource(R.drawable.kocka1);
         masodikImageView.setVisibility(View.VISIBLE);
+        lathatoEMindAKettoKepAmelyikADobokockatJelenitiMeg = true;
     }
 
     public void kepValtakozas() {
