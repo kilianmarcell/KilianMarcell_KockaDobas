@@ -20,9 +20,6 @@ public class MainActivity extends AppCompatActivity {
     private String dobasokSzoveg;
     private Boolean lathatoEMindAKettoKepAmelyikADobokockatJelenitiMeg;
 
-    public MainActivity() {
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,41 +30,14 @@ public class MainActivity extends AppCompatActivity {
             masodikImageView.setVisibility(View.GONE);
             lathatoEMindAKettoKepAmelyikADobokockatJelenitiMeg = false;
         });
+
         kockaKettoButton.setOnClickListener(view -> {
             masodikImageView.setVisibility(View.VISIBLE);
             lathatoEMindAKettoKepAmelyikADobokockatJelenitiMeg = true;
         });
+
         dobasButton.setOnClickListener(view -> {
-
-
-            //TODO: kepValtakozas();
-
-
-            String sor = "";
-            int osszeg = 0;
-            int hanyszor = 1;
-            if (lathatoEMindAKettoKepAmelyikADobokockatJelenitiMeg) {
-                hanyszor = 2;
-            }
-            for (int i = 0; i < hanyszor; i++) {
-                if (i == 0) {
-                    int randomSzam = (int)(Math.random() * 6) + 1;
-                    if (!lathatoEMindAKettoKepAmelyikADobokockatJelenitiMeg) {
-                        dobasokSzoveg += randomSzam + "\n";
-                    }
-                    osszeg += randomSzam;
-                    sor += " (" + randomSzam + "+";
-                    kepBeallitas(randomSzam, elsoImageView);
-                } else {
-                    int randomSzam = (int)(Math.random() * 6) + 1;
-                    sor += randomSzam + ")\n";
-                    osszeg += randomSzam;
-                    dobasokSzoveg += osszeg + sor;
-                    kepBeallitas(randomSzam, masodikImageView);
-                }
-            }
-            Toast.makeText(MainActivity.this, osszeg + "", Toast.LENGTH_SHORT).show();
-            textView.setText(dobasokSzoveg);
+            kepValtakozas();
         });
 
         resetButton.setOnClickListener(view -> {
@@ -101,30 +71,58 @@ public class MainActivity extends AppCompatActivity {
         lathatoEMindAKettoKepAmelyikADobokockatJelenitiMeg = true;
     }
 
-    public void kepValtakozas() {
-        int[] imageArray = {
-                R.drawable.kocka1,
-                R.drawable.kocka2,
-                R.drawable.kocka3,
-                R.drawable.kocka4,
-                R.drawable.kocka5,
-                R.drawable.kocka6,
-        };
-        Handler handler = new Handler();
-        Runnable runnable = new Runnable() {
-            int i = (int)Math.random() * 6 + 1;
-
-            public void run() {
-                elsoImageView.setImageResource(imageArray[i]);
-                masodikImageView.setImageResource(imageArray[i]);
-                i++;
-                if (i > imageArray.length - 1) {
-                    i = 0;
+    public void dobasGomb() {
+        String sor = "";
+        int osszeg = 0;
+        int hanyszor = 1;
+        if (lathatoEMindAKettoKepAmelyikADobokockatJelenitiMeg) {
+            hanyszor = 2;
+        }
+        for (int i = 0; i < hanyszor; i++) {
+            if (i == 0) {
+                int randomSzam = (int)(Math.random() * 6) + 1;
+                if (!lathatoEMindAKettoKepAmelyikADobokockatJelenitiMeg) {
+                    dobasokSzoveg += randomSzam + "\n";
                 }
-                handler.postDelayed(this, 200);
+                osszeg += randomSzam;
+                sor += " (" + randomSzam + "+";
+                kepBeallitas(randomSzam, elsoImageView);
+            } else {
+                int randomSzam = (int)(Math.random() * 6) + 1;
+                sor += randomSzam + ")\n";
+                osszeg += randomSzam;
+                dobasokSzoveg += osszeg + sor;
+                kepBeallitas(randomSzam, masodikImageView);
             }
-        };
-        handler.postDelayed(runnable, 200);
+        }
+        Toast.makeText(MainActivity.this, osszeg + "", Toast.LENGTH_SHORT).show();
+        textView.setText(dobasokSzoveg);
+    }
+
+    public int f = 0;
+    public int g = 10;
+
+    public void kepValtakozas() {
+        if (f < g) {
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    if (lathatoEMindAKettoKepAmelyikADobokockatJelenitiMeg) {
+                        int randomSzam1 = (int)(Math.random() * 6 + 1);
+                        int randomSzam2 = (int)(Math.random() * 6 + 1);
+                        kepBeallitas(randomSzam1, elsoImageView);
+                        kepBeallitas(randomSzam2, masodikImageView);
+                    } else {
+                        int randomSzam1 = (int)(Math.random() * 6 + 1);
+                        kepBeallitas(randomSzam1, elsoImageView);
+                    }
+                    f++;
+                    kepValtakozas();
+                }},100);
+        } else {
+            dobasGomb();
+            f = 0;
+        }
     }
 
     private void kepBeallitas(int randomSzam, ImageView imegeView) {
