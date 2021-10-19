@@ -43,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
         resetButton.setOnClickListener(view -> {
             AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
             alertBuilder.setTitle("Reset");
-            alertBuilder.setMessage("Biztos, hogy törölni szeretné az eddigi dobásokat?");
             alertBuilder.setMessage("Szeretne új játékot játszani?");
             alertBuilder.setNegativeButton("Nem", new DialogInterface.OnClickListener() {
                 @Override
